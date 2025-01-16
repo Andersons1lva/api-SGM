@@ -25,20 +25,30 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
-        if (token != null) {
-            var email = tokenService.validateToken(token);
-            UserDetails user = userRepository.findByEmail(email);
-
-            var authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = recoverToken(request);
+        if (token != null && !token.isEmpty()) {
+            String email = tokenService.validateToken(token); // Valida o token e extrai o email
+            if (email != null && !email.isEmpty()) {
+                UserDetails user = userRepository.findByEmail(email);
+                if (user != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+                // Adicionar logs
+                System.out.println("URL requisitada: " + request.getMethod() + " " + request.getRequestURI());
+                System.out.println("Token presente: " + (token != null));
+                System.out.println("Usuário: " + email);
+                System.out.println("Roles: " + user.getAuthorities());
+            }
         }
         filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request){
-        var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer")) {
+            return null;
+        }
         return authHeader.replace("Bearer ", "");
     }
 }

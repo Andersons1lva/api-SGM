@@ -1,5 +1,6 @@
 package com.adb.Sgm.model;
 
+import com.adb.Sgm.requetsDTO.EnderecoRequestDTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,5 +29,4 @@ public class Endereco {
         return builder -> builder
                 .featuresToEnable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     }
-
 }

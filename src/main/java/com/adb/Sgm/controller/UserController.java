@@ -1,34 +1,34 @@
 package com.adb.Sgm.controller;
 
-import com.adb.Sgm.dtos.UserResponseDTO;
 import com.adb.Sgm.model.User;
 import com.adb.Sgm.repository.UserRepository;
-import com.adb.Sgm.requetsDTO.UserRequestDTO;
+import com.adb.Sgm.requetsDTO.UserDTO;
+import com.adb.Sgm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
+    @GetMapping
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
 
-//    @CrossOrigin(origins = "*",allowedHeaders = "*")
-//    @PostMapping
-//    public void saveUser(@RequestBody UserRequestDTO data){
-//        User userData = new User(data);
-//        userRepository.save(userData);
-//        return;
-//    }
-
-//    @CrossOrigin(origins = "*",allowedHeaders = "*")
-//    @GetMapping
-//    public List<UserResponseDTO> getAll(){
-//        List<UserResponseDTO> userList = userRepository.findAll().stream().map(UserResponseDTO::new).toList();
-//        return userList;
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody UserDTO registerDTO){
+        userService.registerUser(registerDTO.email(), registerDTO.password(), registerDTO.role());
+        return ResponseEntity.ok().build();
+    }
 }
