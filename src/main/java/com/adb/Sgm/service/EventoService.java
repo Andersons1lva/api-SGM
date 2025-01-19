@@ -5,7 +5,7 @@ import com.adb.Sgm.dtos.EventoDTO;
 import com.adb.Sgm.model.Evento;
 import com.adb.Sgm.model.User;
 import com.adb.Sgm.repository.EventoRepository;
-import com.adb.Sgm.repository.UsersRepository;
+import com.adb.Sgm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +20,11 @@ public class EventoService {
     EventoRepository eventoRepository;
 
     @Autowired
-    UsersRepository usersRepository;
+    UserRepository userRepository;
 
 
     public EventoDTO criarEvento(EventoDTO eventDTO, String email) {
-        User user = (User) usersRepository.findByEmail(email);
+        User user = (User) userRepository.findByEmail(email);
 
         Evento event = new Evento();
         event.setTitulo(eventDTO.getTitulo());

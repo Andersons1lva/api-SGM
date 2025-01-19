@@ -1,7 +1,7 @@
 package com.adb.Sgm.controller;
 
 import com.adb.Sgm.model.User;
-import com.adb.Sgm.repository.UsersRepository;
+import com.adb.Sgm.repository.UserRepository;
 import com.adb.Sgm.requetsDTO.UserDTO;
 import com.adb.Sgm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
     @Autowired
     private UserService userService;
 
     @GetMapping
     public List<User> getAll(){
-        return usersRepository.findAll();
+        return userRepository.findAll();
     }
 
     @PostMapping("/register")

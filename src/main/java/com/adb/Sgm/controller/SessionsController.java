@@ -1,7 +1,7 @@
 package com.adb.Sgm.controller;
 import com.adb.Sgm.infra.security.TokenService;
 import com.adb.Sgm.model.User;
-import com.adb.Sgm.repository.UsersRepository;
+import com.adb.Sgm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class SessionsController {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private TokenService tokenService;
@@ -27,7 +27,7 @@ public class SessionsController {
         String email = userCredentials.getEmail();
         String password = userCredentials.getPassword();
         // Busca o usuário pelo email
-        User user = (User) usersRepository.findByEmail(email);
+        User user = (User) userRepository.findByEmail(email);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>() {{ put("message", "E-mail e/ou senha incorreta"); }});
         }
