@@ -1,6 +1,6 @@
 package com.adb.Sgm.service;
 
-import com.adb.Sgm.repository.UserRepository;
+import com.adb.Sgm.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    UsersRepository usersRepository;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email);
+        return usersRepository.findByEmail(email);
     }
 }

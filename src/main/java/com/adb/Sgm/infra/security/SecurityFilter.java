@@ -1,6 +1,6 @@
 package com.adb.Sgm.infra.security;
 
-import com.adb.Sgm.repository.UserRepository;
+import com.adb.Sgm.repository.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
     @Autowired
-    UserRepository userRepository;
+    UsersRepository usersRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -29,7 +29,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (token != null && !token.isEmpty()) {
             String email = tokenService.validateToken(token); // Valida o token e extrai o email
             if (email != null && !email.isEmpty()) {
-                UserDetails user = userRepository.findByEmail(email);
+                UserDetails user = usersRepository.findByEmail(email);
                 if (user != null) {
                     var authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
