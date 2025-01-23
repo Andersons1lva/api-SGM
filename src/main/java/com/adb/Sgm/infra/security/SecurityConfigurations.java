@@ -33,7 +33,7 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers(HttpMethod.POST,"/api/sessions").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/sessions").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
 
                         // Rotas específicas para membros
