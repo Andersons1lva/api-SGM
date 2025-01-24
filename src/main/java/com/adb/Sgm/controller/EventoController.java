@@ -1,7 +1,6 @@
 package com.adb.Sgm.controller;
 import com.adb.Sgm.dtos.EventoDTO;
 import com.adb.Sgm.model.Evento;
-import com.adb.Sgm.model.Membro;
 import com.adb.Sgm.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/auth/eventos")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/eventos")
 public class EventoController {
     @Autowired
     EventoService eventoService;
