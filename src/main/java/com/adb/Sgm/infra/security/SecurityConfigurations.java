@@ -37,18 +37,18 @@ public class SecurityConfigurations {
                         .requestMatchers("/users/register").permitAll()
 
                         // Rotas específicas para membros
-                        .requestMatchers(HttpMethod.GET, "/membros").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.POST, "/membros").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.PUT, "/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.DELETE, "/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/auth/membros").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/auth/membros").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
 
                         // Rotas específicas para eventos
-                        .requestMatchers(HttpMethod.GET, "/eventos").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.POST, "/eventos").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.PUT, "/eventos/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.DELETE, "/eventos/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/eventos/mes_atual").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/eventos").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/auth/eventos").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/eventos/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/eventos/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/auth/eventos/mes_atual").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
 
                 )

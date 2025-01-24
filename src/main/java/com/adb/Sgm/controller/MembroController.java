@@ -2,6 +2,7 @@ package com.adb.Sgm.controller;
 
 
 import com.adb.Sgm.model.Membro;
+import com.adb.Sgm.repository.MembroRepository;
 import com.adb.Sgm.requetsDTO.MembroRequestDTO;
 import com.adb.Sgm.service.MembroService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,14 +16,14 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/membros")
+@RequestMapping("/api/auth")
 public class MembroController {
 
     @Autowired
     private MembroService membroService;
 
 
-    @PostMapping()
+    @PostMapping("/membros")
     public ResponseEntity<Membro> saveMembro(@RequestBody MembroRequestDTO data){
         Membro membroData = new Membro(data);
         membroService.criarMembro(membroData);
@@ -30,7 +31,7 @@ public class MembroController {
     }
 
 
-    @GetMapping()
+    @GetMapping("/membros")
     public List<Membro> getMembros() {
         return membroService.buscarMembros();
     }
@@ -56,7 +57,7 @@ public class MembroController {
         Membro membro = membroService.buscarPorId(id);
         return ResponseEntity.ok(membro);
     }
-    @PutMapping("/{uuid}")
+    @PutMapping("/membros/{uuid}")
     public ResponseEntity<Membro> atualizarMembro(@PathVariable UUID uuid,@RequestBody Membro membro) {
         Membro atualizar = membroService.atualizarMembro(uuid, membro);
         return ResponseEntity.ok(atualizar);
