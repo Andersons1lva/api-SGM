@@ -37,11 +37,11 @@ public class SecurityConfigurations {
                         .requestMatchers("/users/register").permitAll()
 
                         // Rotas específicas para membros
-                        .requestMatchers(HttpMethod.GET, "/api/auth/membros").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.POST, "/api/auth/membros").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.PUT, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/api/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/auth/membros").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/auth/membros").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.PUT, "/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/auth/{id}").hasAnyRole("ADMIN", "USER")
 
                         // Rotas específicas para eventos
                         .requestMatchers(HttpMethod.GET, "/api/eventos").hasAnyRole("ADMIN", "USER")
