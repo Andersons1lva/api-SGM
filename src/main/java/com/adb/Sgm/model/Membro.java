@@ -22,7 +22,7 @@ public class Membro {
 
     private String nome;
     @Column(name = "sobre_nome")
-    private String sobreNome;
+    private String sobrenome;
     private Integer idade;
     private String sexo;
     private String rg;
@@ -50,7 +50,7 @@ public class Membro {
     public Membro(MembroRequestDTO data){
         this.id = data.id();
         this.nome = data.nome();
-        this.sobreNome = data.sobrenome();
+        this.sobrenome = data.sobrenome();
         this.idade = data.idade();
         this.rg = data.rg();
         this.sexo = data.sexo();

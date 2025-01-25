@@ -5,8 +5,6 @@ import com.adb.Sgm.configuration.ResourceNotFoundException;
 import com.adb.Sgm.model.Endereco;
 import com.adb.Sgm.model.Membro;
 import com.adb.Sgm.repository.MembroRepository;
-import com.adb.Sgm.requetsDTO.EnderecoRequestDTO;
-import com.adb.Sgm.requetsDTO.MembroRequestDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +72,7 @@ public class MembroService {
 
         // 4. Atualiza os dados do membro
         membroExistente.setNome(membroDTO.getNome());
-        membroExistente.setSobreNome(membroDTO.getSobreNome());
+        membroExistente.setSobrenome(membroDTO.getSobrenome());
         membroExistente.setEmail(membroDTO.getEmail());
         membroExistente.setIdade(membroDTO.getIdade());
         membroExistente.setNumero_celular(membroDTO.getNumero_celular());
