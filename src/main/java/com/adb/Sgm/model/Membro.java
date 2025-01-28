@@ -32,7 +32,7 @@ public class Membro {
     private String numero_celular;
     private String email;
     @Column(name = "estado_civil")
-    private String estadoCivil;
+    private String estado_civil;
     private String funcao_ministerial;
     private LocalDate data_batismo;
     private LocalDate data_casamento;
@@ -59,7 +59,7 @@ public class Membro {
         this.nome_mae = data.nome_mae();
         this.numero_celular = data.numero_celular();
         this.email = data.email();
-        this.estadoCivil = data.estado_civil();
+        this.estado_civil = data.estado_civil();
         this.funcao_ministerial = data.funcao_ministerial();
         this.data_batismo = data.data_batismo();
         this.data_casamento = data.data_casamento();

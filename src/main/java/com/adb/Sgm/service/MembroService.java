@@ -87,7 +87,7 @@ public class MembroService {
         membroExistente.setNascionalidade(membroDTO.getNascionalidade());
         membroExistente.setFuncao_ministerial(membroDTO.getFuncao_ministerial());
         membroExistente.setSexo(membroDTO.getSexo());
-        membroExistente.setEstadoCivil(membroDTO.getEstadoCivil());
+        membroExistente.setEstado_civil(membroDTO.getEstado_civil());
         membroExistente.setData_casamento(membroDTO.getData_casamento());
         membroExistente.setTempo_membro(membroDTO.getTempo_membro());
 

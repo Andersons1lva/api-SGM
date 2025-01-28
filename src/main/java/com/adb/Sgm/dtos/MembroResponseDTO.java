@@ -16,7 +16,7 @@ public record MembroResponseDTO(UUID id, String nome, String rg, String cpf, Str
         this(membro.getId(), membro.getNome(), membro.getRg(),
                 membro.getCpf(), membro.getEmail(),
                 membro.getNome_pai(), membro.getNome_mae(),
-                membro.getEstadoCivil(), membro.getFuncao_ministerial(),
+                membro.getEstado_civil(), membro.getFuncao_ministerial(),
                 membro.getNumero_celular(), membro.getData_batismo(),
                 membro.getData_casamento(), membro.getData_nascimento(),
                 membro.getTempo_membro(), membro.getNascionalidade(),
