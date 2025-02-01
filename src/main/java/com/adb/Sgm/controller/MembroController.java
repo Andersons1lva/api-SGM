@@ -57,7 +57,7 @@ public class MembroController {
         Membro membro = membroService.buscarPorId(id);
         return ResponseEntity.ok(membro);
     }
-    @PutMapping("/{uuid}")
+    @PutMapping("/membros/{uuid}")
     public ResponseEntity<Membro> atualizarMembro(@PathVariable UUID uuid,@RequestBody Membro membro) {
         Membro atualizar = membroService.atualizarMembro(uuid, membro);
         return ResponseEntity.ok(atualizar);

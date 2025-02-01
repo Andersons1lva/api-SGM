@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,8 +31,8 @@ public class EventoService {
 
         Evento event = new Evento();
         event.setTitulo(eventDTO.getTitulo());
-        event.setInicio(LocalDate.parse(eventDTO.getInicio()));
-        event.setFim(LocalDate.parse(eventDTO.getFim()));
+        event.setInicio(converterParaLocalDateTime(eventDTO.getInicio()));
+        event.setFim(converterParaLocalDateTime(eventDTO.getFim()));
         event.setDiaTodo(eventDTO.isDia_todo());
         event.setUser(user);
 
@@ -38,12 +41,14 @@ public class EventoService {
     }
 
     public EventoDTO convertToDTO(Evento evento) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         EventoDTO dto = new EventoDTO();
         dto.setId(evento.getId());
         dto.setTitulo(evento.getTitulo());
-        dto.setInicio(String.valueOf((evento.getInicio())));
-        dto.setFim((evento.getFim().toString()));
+        dto.setInicio(evento.getInicio() != null ? evento.getInicio().format(formatter) : null);
+        dto.setFim(evento.getFim() != null ? evento.getFim().format(formatter) : null);
         dto.setDia_todo(evento.isDiaTodo());
+        dto.setDia(evento.getDia());
         return dto;
     }
 
@@ -57,5 +62,12 @@ public class EventoService {
 
     public List<Evento> buscarEventosDoMesAtual(){
         return eventoRepository.findEventosByMesAtual();
+    }
+
+    private LocalDateTime converterParaLocalDateTime(String dataRecebida) {
+        if (dataRecebida == null || dataRecebida.isEmpty()) {
+            return null;
+        }
+        return ZonedDateTime.parse(dataRecebida).toLocalDateTime();
     }
 }

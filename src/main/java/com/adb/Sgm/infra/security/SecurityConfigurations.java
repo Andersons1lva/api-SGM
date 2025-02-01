@@ -39,7 +39,7 @@ public class SecurityConfigurations {
                         // Rotas específicas para membros
                         .requestMatchers(HttpMethod.GET, "/auth/membros").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.POST, "/auth/membros").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.PUT, "/auth/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.PUT, "/auth/membros/{id}").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.DELETE, "/auth/{id}").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/auth/{id}").hasAnyRole("ADMIN", "USER")
 
