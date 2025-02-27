@@ -1,6 +1,8 @@
 package com.adb.Sgm.model;
 
 import com.adb.Sgm.requetsDTO.MembroRequestDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,6 +47,11 @@ public class Membro {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName ="id")
     private Endereco endereco;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     //Criação do construtor para o DTO em uma entidade
     public Membro(MembroRequestDTO data){

@@ -4,9 +4,12 @@ import com.adb.Sgm.configuration.BusinessException;
 import com.adb.Sgm.configuration.ResourceNotFoundException;
 import com.adb.Sgm.model.Endereco;
 import com.adb.Sgm.model.Membro;
+import com.adb.Sgm.model.User;
 import com.adb.Sgm.repository.MembroRepository;
+import com.adb.Sgm.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +22,9 @@ public class MembroService {
 
     @Autowired
     private MembroRepository membroRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Membro criarMembro(Membro membro) {
         return membroRepository.save(membro);
@@ -44,8 +50,12 @@ public class MembroService {
                 .orElseThrow(() -> new RuntimeException("Membro não encontrado com o ID: " + id));
     }
 
-    public List<Membro> buscarMembros(){
-        return membroRepository.findAll();
+//    public List<Membro> buscarMembros(){
+//        return membroRepository.findAll();
+//    }
+
+    public List<Membro> listarMembrosPorUsuario(User user) {
+        return membroRepository.findByUser(user);
     }
 
     @Transactional

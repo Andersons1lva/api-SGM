@@ -1,7 +1,8 @@
 package com.adb.Sgm.model;
 
 
-import com.adb.Sgm.requetsDTO.UserRequestDTO;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -34,6 +35,14 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Membro> membros;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Evento> eventos;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

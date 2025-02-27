@@ -3,6 +3,7 @@ package com.adb.Sgm.service;
 import com.adb.Sgm.model.User;
 import com.adb.Sgm.model.UserRole;
 import com.adb.Sgm.repository.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,9 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(password);
         User user = new User(email, encodedPassword, role);
         return userRepository.save(user);
+    }
+
+    public User buscarPorEmail(String email) {
+        return (User) userRepository.findByEmail(email);
     }
 }

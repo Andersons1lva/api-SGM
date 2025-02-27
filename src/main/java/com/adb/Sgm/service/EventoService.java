@@ -52,8 +52,8 @@ public class EventoService {
         return dto;
     }
 
-    public List<Evento> buscarEventos(){
-        return eventoRepository.findAll();
+    public List<Evento> listarEventosPorUsuario(User user) {
+        return eventoRepository.findByUser(user);
     }
 
     public void deletarEvento(UUID id) {
