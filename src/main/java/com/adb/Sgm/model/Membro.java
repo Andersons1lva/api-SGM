@@ -2,7 +2,6 @@ package com.adb.Sgm.model;
 
 import com.adb.Sgm.requetsDTO.MembroRequestDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 

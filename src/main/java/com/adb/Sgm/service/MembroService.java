@@ -9,7 +9,6 @@ import com.adb.Sgm.repository.MembroRepository;
 import com.adb.Sgm.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -40,19 +39,14 @@ public class MembroService {
         return false;
     }
 
-    public List<Membro> getAniversarianteDoMes(){
-        int mesAtual = LocalDate.now().getMonthValue();
-        return membroRepository.findByMesAniversario(mesAtual);
+    public List<Membro> getAniversarianteDoMes(int mesAtual, User user){
+        return membroRepository.findByMesAniversario(mesAtual, user);
     }
 
     public Membro buscarPorId(UUID id) {
         return membroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Membro não encontrado com o ID: " + id));
     }
-
-//    public List<Membro> buscarMembros(){
-//        return membroRepository.findAll();
-//    }
 
     public List<Membro> listarMembrosPorUsuario(User user) {
         return membroRepository.findByUser(user);

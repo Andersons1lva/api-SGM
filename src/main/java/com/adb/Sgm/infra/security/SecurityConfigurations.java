@@ -14,11 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -46,7 +41,6 @@ public class SecurityConfigurations {
                         // Rotas específicas para eventos
                         .requestMatchers(HttpMethod.GET, "/api/eventos").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.POST, "/api/auth/eventos").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.PUT, "/api/eventos/{id}").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.DELETE, "/api/auth/eventos/{id}").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/api/auth/eventos/mes_atual").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()

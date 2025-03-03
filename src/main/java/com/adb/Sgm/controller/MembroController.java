@@ -3,7 +3,6 @@ package com.adb.Sgm.controller;
 
 import com.adb.Sgm.model.Membro;
 import com.adb.Sgm.model.User;
-import com.adb.Sgm.requetsDTO.MembroRequestDTO;
 import com.adb.Sgm.service.MembroService;
 import com.adb.Sgm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,18 +39,6 @@ public class MembroController {
         return membroService.criarMembro(membro);
     }
 
-//    @PostMapping("/membros")
-//    public ResponseEntity<Membro> saveMembro(@RequestBody MembroRequestDTO data){
-//        Membro membroData = new Membro(data);
-//        membroService.criarMembro(membroData);
-//        return ResponseEntity.ok().build();
-//    }
-
-
-//    @GetMapping("/membros")
-//    public List<Membro> getMembros() {
-//        return membroService.buscarMembros();
-//    }
     @GetMapping("/membros")
     public List<Membro> listarMembros() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -73,7 +61,12 @@ public class MembroController {
 
     @GetMapping("/aniversariantes")
     public List<Membro> getAniversariantes(){
-        return membroService.getAniversarianteDoMes();
+        int mesAtual = LocalDate.now().getMonthValue();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String emailUsuario = authentication.getName();
+        User usuarioLogado = userService.buscarPorEmail(emailUsuario);
+        return membroService.getAniversarianteDoMes(mesAtual, usuarioLogado);
     }
 
     @GetMapping("/{id}")

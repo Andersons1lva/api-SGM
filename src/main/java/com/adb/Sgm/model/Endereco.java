@@ -1,6 +1,5 @@
 package com.adb.Sgm.model;
 
-import com.adb.Sgm.requetsDTO.EnderecoRequestDTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import jakarta.persistence.*;
 import lombok.Getter;

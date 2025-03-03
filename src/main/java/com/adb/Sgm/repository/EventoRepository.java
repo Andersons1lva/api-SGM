@@ -4,6 +4,7 @@ import com.adb.Sgm.model.Evento;
 import com.adb.Sgm.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
@@ -12,8 +13,8 @@ import java.util.UUID;
 public interface EventoRepository extends JpaRepository<Evento, UUID> {
     List<Evento> findByUser(User user);
 
-    @Query("SELECT e FROM eventos e WHERE MONTH(e.inicio) = MONTH(CURRENT_DATE)")
-    List<Evento> findEventosByMesAtual();
+    @Query("SELECT e FROM eventos e WHERE MONTH(e.inicio) = MONTH(CURRENT_DATE) AND e.user = :user")
+    List<Evento> findEventosByMesAtual(@Param("user")User user);
 
 
 }
