@@ -33,6 +33,7 @@ public class EventoController {
         evento.setTitulo(eventoDTO.getTitulo());
         evento.setInicio(eventoDTO.getInicioLocalDateTime());
         evento.setFim(eventoDTO.getFimLocalDateTime());
+        evento.setDiaTodo(eventoDTO.isDia_todo());
         evento.setUser(usuarioLogado);
 
         return eventoService.salvarEvento(evento);
